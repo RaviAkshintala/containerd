@@ -1,5 +1,10 @@
 name: CI
-on: [push, pull_request]
+on:
+  # When added to a merge queue.
+  # See https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue#triggering-merge-group-checks-with-github-actions
+  merge_group:
+  pull_request:
+    branches: ['test', 'release/**']
 
 permissions: # added using https://github.com/step-security/secure-workflows
   contents: read
