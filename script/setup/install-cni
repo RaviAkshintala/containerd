@@ -22,7 +22,7 @@
 set -eu -o pipefail
 
 # FIXME: when https://github.com/containernetworking/plugins/issues/1121 is resolved and released
-CNI_COMMIT=${1:-v1.3.0}
+CNI_COMMIT=${1:-v1.6.2}
 CNI_DIR=${DESTDIR:=''}/opt/cni
 CNI_CONFIG_DIR=${DESTDIR}/etc/cni/net.d
 : "${CNI_REPO:=https://github.com/containernetworking/plugins.git}"
