@@ -22,7 +22,7 @@
 set -eu -o pipefail
 
 # FIXME: when https://github.com/containernetworking/plugins/issues/1121 is resolved and released
-CNI_COMMIT=${1:-v1.6.2}
+CNI_COMMIT=${1:-v1.5.1}
 CNI_DIR=${DESTDIR:=''}/opt/cni
 CNI_CONFIG_DIR=${DESTDIR}/etc/cni/net.d
 : "${CNI_REPO:=https://github.com/containernetworking/plugins.git}"
@@ -57,9 +57,6 @@ $SUDO cat << EOF | $SUDO tee $CNI_CONFIG_DIR/10-containerd-net.conflist
         "ranges": [
           [{
             "subnet": "10.88.0.0/16"
-          }],
-          [{
-            "subnet": "2001:4860:4860::/64"
           }]
         ],
         "routes": [
