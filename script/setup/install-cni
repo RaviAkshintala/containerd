@@ -33,6 +33,11 @@ if (( $EUID != 0 )); then
     SUDO='sudo'
 fi
 
+echo "[INFO] Switching iptables and ip6tables to legacy backend..."
+$SUDO update-alternatives --set iptables /usr/sbin/iptables-legacy || echo "[WARN] iptables-legacy not available"
+$SUDO update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy || echo "[WARN] ip6tables-legacy not available"
+
+
 TMPROOT=$(mktemp -d)
 git clone "${CNI_REPO}" "${TMPROOT}"/plugins
 pushd "${TMPROOT}"/plugins
@@ -59,6 +64,11 @@ $SUDO cat << EOF | $SUDO tee $CNI_CONFIG_DIR/10-containerd-net.conflist
             "subnet": "10.88.0.0/16"
           }]
         ],
+          [{
+            "subnet": "2001:4860:4860::/64"
+          }]
+        ],
+
         "routes": [
           { "dst": "0.0.0.0/0" },
           { "dst": "::/0" }
